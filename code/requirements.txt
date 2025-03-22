@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+pydantic
+python-dotenv
+requests
+pdfplumber   # For parsing PDFs
+pytesseract  # OCR for image attachments
+numpy
+pandas
