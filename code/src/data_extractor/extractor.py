@@ -1,4 +1,4 @@
-from models import ParsedEmail, ExtractedData
+from src.models import ParsedEmail, ExtractedData
 
 def extract_fields(parsed_email: ParsedEmail) -> ExtractedData:
     """Extracts structured data (amount, date, etc.)."""

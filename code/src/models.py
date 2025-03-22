@@ -2,8 +2,8 @@ from pydantic import BaseModel
 from typing import List, Optional, Dict
 
 class Attachment(BaseModel):
-    filename: str
-    content: str  # Base64 encoded content OR parsed content
+    fileName: str
+    data: str  # Base64 encoded content OR parsed content
 
 # 📩 Email Data Model (Ingestion Output)
 class Email(BaseModel):
