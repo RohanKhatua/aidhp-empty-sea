@@ -1,5 +1,5 @@
 import requests
-from models import NotificationRequest
+from src.models import NotificationRequest
 from config.config import NOTIF_ENDPOINT
 
 def send_notification(notification: NotificationRequest):

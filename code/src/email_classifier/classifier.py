@@ -1,4 +1,4 @@
-from models import ParsedEmail, ExtractedData, Classification
+from src.models import ParsedEmail, ExtractedData, Classification
 
 def classify_email(extracted_data: ExtractedData) -> Classification:
     """Determines the request type based on parsed email content."""

@@ -1,4 +1,4 @@
-from models import Email, ParsedEmail
+from src.models import Email, ParsedEmail
 
 def parse_email(email: Email) -> ParsedEmail:
     """Extracts text & key fields from email body & attachments."""
