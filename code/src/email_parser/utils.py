@@ -7,7 +7,7 @@ import docx
 import fitz
 from pptx import Presentation
 import re
-from models import Attachment
+from src.models import Attachment
 from typing import List, Optional, Dict
 
 
@@ -69,8 +69,8 @@ def parse_attachments(attachments:list[Attachment]):
     parsed_attachments = []
 
     for attachment in attachments:
-        filename = attachment.filename
-        content = attachment.content
+        filename = attachment.fileName
+        content = attachment.data
 
         extracted_content = process_attachment(filename, content)
 
@@ -82,8 +82,8 @@ def parse_attachments(attachments:list[Attachment]):
         #parsed_attachments.append(temp)
 
         parsed_attachments.append({
-            "filename": filename,
-            "content": extracted_content
+            "fileName": filename,
+            "data": extracted_content
         })
 
     return parsed_attachments

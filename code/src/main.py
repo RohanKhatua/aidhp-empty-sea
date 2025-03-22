@@ -38,6 +38,7 @@ def process_email(raw_email: Dict):
 
     # Step 2: Parse Email
     parsed_email = parse_email(email)
+    print(parsed_email.model_dump_json())
 
     # Step 3: Extract Key Data
     extracted_data = extract_fields(parsed_email)
