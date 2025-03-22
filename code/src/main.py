@@ -1,0 +1,55 @@
+# Entry Point.
+# 1. Email Ingestion
+# 2. Email Parsing
+# 3. (TODO) Duplicate Email Detection
+# 4. Email Data Extraction
+# 5. Email Classification
+# 6. Notification Service
+
+from typing import Dict
+from fastapi import FastAPI
+
+from notification_service.notifier import send_notification
+from email_parser.parser import parse_email
+from data_extractor.extractor import extract_fields
+from email_classifier.classifier import classify_email
+from email_ingestion.ingestion import ingest_email
+
+app = FastAPI()
+
+@app.get("/health")
+def health_check():
+    return {"status": "ok"}
+
+@app.post("/process-email")
+def process_email(raw_email: Dict):
+    """
+    API endpoint for processing an email end-to-end.
+    - Ingests email
+    - Parses content
+    - Extracts key data
+    - Classifies request type
+    - Sends notifications
+    """
+    # Step 1: Ingest Email
+    # email = ingest_email(raw_email.dict())
+    email = ingest_email()
+    # I'll handle this however, just assume you will get input of type Email for parsing.
+
+    # Step 2: Parse Email
+    parsed_email = parse_email(email)
+
+    # Step 3: Extract Key Data
+    extracted_data = extract_fields(parsed_email)
+
+    # Step 4: Classify Request Type
+    classification = classify_email(extracted_data)
+
+    # Step 5: Send Notifications
+    # send_notification()
+
+    return {"message": "Email processed successfully!", "classification": classification.model_dump()}
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)

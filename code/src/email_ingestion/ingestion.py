@@ -1,17 +1,15 @@
-import imaplib
-import email
-from email.header import decode_header
-import os
+from models import Email
 
-def ingest_email():
-    """Fetches an email from a configured mailbox."""
-    # TODO: Replace with real email fetching (Gmail, Outlook, etc.)
-    return {
-        "email_id": "123",
-        "subject": "Fund Transfer Request",
-        "body": "Please transfer $5000 to XYZ account.",
-        "attachments": [],
-    }
+def ingest_email() -> Email:
+    """Fetches an email from a configured mailbox. Or, from an n8n node as an intermediary."""
+    return Email(
+        email_id="123",
+        subject="Fund Transfer Request",
+        body="Please transfer $5000 to XYZ account.",
+        timestamp="2023-10-01T12:00:00Z",
+        sender="j",
+        attachments=[],
+    )
 
 if __name__ == "__main__":
-    print(ingest_email())  # For testing
+    print(ingest_email().model_dump_json())  # For testing

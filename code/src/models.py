@@ -6,6 +6,8 @@ class Email(BaseModel):
     email_id: str
     subject: str
     body: str
+    timestamp: str  # Format: YYYY-MM-DD HH:MM:SS
+    sender: str
     attachments: List[dict]  # [{ "filename": "file.pdf", "content": "base64string" }]
 
 # 📜 Parsed Email Data Model (Parser Output)
