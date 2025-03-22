@@ -14,6 +14,7 @@ class Email(BaseModel):
     sender: str
     attachments: List[Attachment]  # [{ "filename": "file.pdf", "content": "base64string" }]
 
+
 # 📜 Parsed Email Data Model (Parser Output)
 class ParsedEmail(BaseModel):
     email_id: str
