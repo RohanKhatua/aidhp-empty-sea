@@ -1,6 +1,10 @@
 from pydantic import BaseModel
 from typing import List, Optional, Dict
 
+class Attachment(BaseModel):
+    filename: str
+    content: str  # Base64 encoded content OR parsed content
+
 # 📩 Email Data Model (Ingestion Output)
 class Email(BaseModel):
     email_id: str
@@ -8,13 +12,16 @@ class Email(BaseModel):
     body: str
     timestamp: str  # Format: YYYY-MM-DD HH:MM:SS
     sender: str
-    attachments: List[dict]  # [{ "filename": "file.pdf", "content": "base64string" }]
+    attachments: List[Attachment]  # [{ "filename": "file.pdf", "content": "base64string" }]
 
 # 📜 Parsed Email Data Model (Parser Output)
 class ParsedEmail(BaseModel):
     email_id: str
     parsed_body: str
-    attachments: List[dict]  # Same structure as in Email, but with actual parsed "content"
+    subject: str
+    timestamp: str  # Format: YYYY-MM-DD HH:MM:SS
+    sender: str
+    attachments: List[Attachment]  # Same structure as in Email, but with actual parsed "content"
 
 # 📊 Extracted Fields (Data Extraction Output)
 class ExtractedData(BaseModel):

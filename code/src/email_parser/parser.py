@@ -6,6 +6,9 @@ def parse_email(email: Email) -> ParsedEmail:
         email_id=email.email_id,
         parsed_body=email.body.lower(),
         attachments=email.attachments,
+        subject=email.subject,
+        timestamp=email.timestamp,
+        sender=email.sender,
     )
 
 if __name__ == "__main__":
