@@ -254,7 +254,7 @@ def extract_keywords(text: str) -> Dict[str, List[str]]:
 
 
 def ensemble_classify(
-    email_text: str, config_path: str = "email_classifier/config/models_config.yaml"
+    email_text: str, config_path: str = "src/email_classifier/config/models_config.yaml"
 ) -> tuple:
     """
     Enhanced ensemble classification using multiple NLP techniques:

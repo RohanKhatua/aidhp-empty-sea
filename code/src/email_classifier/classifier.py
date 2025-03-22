@@ -23,7 +23,7 @@ def classify_email(parsed_email: ParsedEmail) -> Classification:
     # Combine email body and attachments
     email_text = parsed_email.parsed_body
     for attachment in parsed_email.attachments:
-        email_text += "\n" + attachment.content
+        email_text += "\n" + attachment.data
 
     # Get classification decision from the ensemble
     selected_category, selected_subcategory, confidence = ensemble_classify(email_text)
@@ -58,7 +58,7 @@ if __name__ == "__main__":
         sender="customer@example.com",
         attachments=[
             Attachment(
-                filename="details.txt", content="Transfer details and amounts included."
+                fileName="details.txt", data="Transfer details and amounts included."
             )
         ],
     )

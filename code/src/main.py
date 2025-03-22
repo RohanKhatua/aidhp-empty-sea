@@ -42,9 +42,13 @@ def process_email(raw_email: Dict):
 
     # Step 3: Extract Key Data
     extracted_data = extract_fields(parsed_email)
+    print("Extraction done.")
 
     # Step 4: Classify Request Type
     classification = classify_email(parsed_email)
+    print(classification.model_dump_json())
+    print("Classification Result:")
+    print(classification.reasoning)
 
     # Step 5: Send Notifications
     # send_notification()

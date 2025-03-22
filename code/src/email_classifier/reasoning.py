@@ -6,7 +6,7 @@ import dotenv  # Used only for checking CUDA availability
 dotenv.load_dotenv()
 
 # Configure the Gemini API key (replace with your actual key)
-GOOGLE_API_KEY = os.environ.get("GOOGLE_API_KEY")  # Get from environment variable
+GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")  # Get from environment variable
 genai.configure(api_key=GOOGLE_API_KEY)
 
 # Select the Gemini model
