@@ -65,7 +65,7 @@ def process_attachment(filename, base64_content):
     return file_text
 
 # Main function to parse attachments
-def parse_attachments(attachments:list[Attachment]):
+def parse_attachments(attachments):
     parsed_attachments = []
 
     for attachment in attachments:
@@ -74,16 +74,6 @@ def parse_attachments(attachments:list[Attachment]):
 
         extracted_content = process_attachment(filename, content)
 
-        # temp = Attachment(
-        #     filename=filename,
-        #     content=extracted_content
-        # )
-
-        #parsed_attachments.append(temp)
-
-        parsed_attachments.append({
-            "fileName": filename,
-            "data": extracted_content
-        })
+        parsed_attachments.append(Attachment(fileName=filename,data=extracted_content))
 
     return parsed_attachments
