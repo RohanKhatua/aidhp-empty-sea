@@ -1,6 +1,6 @@
-from models import Attachment, ParsedEmail, Classification
-from email_classifier.ensemble import ensemble_classify
-from email_classifier.reasoning import get_reasoning
+from src.models import Attachment, ParsedEmail, Classification, ExtractedData
+from src.email_classifier.ensemble import ensemble_classify
+from src.email_classifier.reasoning import get_reasoning
 
 
 def classify_email(parsed_email: ParsedEmail) -> Classification:

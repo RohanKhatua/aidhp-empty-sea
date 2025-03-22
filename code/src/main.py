@@ -9,11 +9,10 @@
 from typing import Dict
 from fastapi import FastAPI
 
-from notification_service.notifier import send_notification
-from email_parser.parser import parse_email
-from data_extractor.extractor import extract_fields
-from email_classifier.classifier import classify_email
-from email_ingestion.ingestion import ingest_email
+from src.email_parser.parser import parse_email
+from src.data_extractor.extractor import extract_fields
+from src.email_classifier.classifier import classify_email
+from src.email_ingestion.ingestion import ingest_email
 
 app = FastAPI()
 
@@ -31,13 +30,15 @@ def process_email(raw_email: Dict):
     - Classifies request type
     - Sends notifications
     """
+    print("Processing email...")
+    print(raw_email)
     # Step 1: Ingest Email
     # email = ingest_email(raw_email.dict())
-    email = ingest_email()
-    # I'll handle this however, just assume you will get input of type Email for parsing.
+    email = ingest_email(raw_email)
 
     # Step 2: Parse Email
     parsed_email = parse_email(email)
+    print(parsed_email.model_dump_json())
 
     # Step 3: Extract Key Data
     extracted_data = extract_fields(parsed_email)

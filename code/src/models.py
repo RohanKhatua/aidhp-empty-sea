@@ -2,8 +2,8 @@ from pydantic import BaseModel
 from typing import List, Optional, Dict
 
 class Attachment(BaseModel):
-    filename: str
-    content: str  # Base64 encoded content OR parsed content
+    fileName: str
+    data: str  # Base64 encoded content OR parsed content
 
 # 📩 Email Data Model (Ingestion Output)
 class Email(BaseModel):
@@ -13,6 +13,7 @@ class Email(BaseModel):
     timestamp: str  # Format: YYYY-MM-DD HH:MM:SS
     sender: str
     attachments: List[Attachment]  # [{ "filename": "file.pdf", "content": "base64string" }]
+
 
 # 📜 Parsed Email Data Model (Parser Output)
 class ParsedEmail(BaseModel):
