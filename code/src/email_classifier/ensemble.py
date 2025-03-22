@@ -6,7 +6,7 @@ from transformers import pipeline, BertTokenizer, AutoModel
 import torch
 import torch.nn.functional as F
 from sklearn.metrics.pairwise import cosine_similarity
-from email_classifier.config_reader import load_model_config
+from src.email_classifier.config_reader import load_model_config
 
 # Define available categories and subcategories
 CATEGORIES = [
