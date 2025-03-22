@@ -44,7 +44,7 @@ def process_email(raw_email: Dict):
     extracted_data = extract_fields(parsed_email)
 
     # Step 4: Classify Request Type
-    classification = classify_email(extracted_data)
+    classification = classify_email(parsed_email)
 
     # Step 5: Send Notifications
     # send_notification()

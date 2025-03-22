@@ -174,3 +174,4 @@ cython_debug/
 .pypirc
 
 n8n_data
+.vscode

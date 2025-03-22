@@ -1,0 +1,8 @@
+models:
+  # Stronger zero-shot classifiers
+  - name: "facebook/bart-large-mnli"  # Keep this as baseline
+    weight: 0.3
+  - name: "MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli"  # DeBERTa v3 outperforms BERT/RoBERTa on many tasks
+    weight: 0.4
+  - name: "tasksource/ModernBERT-base-nli"  # Cross-encoder with better semantic understanding
+    weight: 0.3
