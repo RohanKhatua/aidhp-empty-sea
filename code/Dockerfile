@@ -7,6 +7,18 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 
+# Create a directory to cache Hugging Face models
+RUN mkdir -p /root/.cache/huggingface
+
+# Pre-download Hugging Face models and cache them
+RUN python -c "from transformers import AutoTokenizer, AutoModelForSequenceClassification; \
+    AutoTokenizer.from_pretrained('facebook/bart-large-mnli'); \
+    AutoModelForSequenceClassification.from_pretrained('facebook/bart-large-mnli'); \
+    AutoTokenizer.from_pretrained('MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli'); \
+    AutoModelForSequenceClassification.from_pretrained('MoritzLaurer/DeBERTa-v3-base-mnli-fever-anli'); \
+    AutoTokenizer.from_pretrained('tasksource/ModernBERT-base-nli'); \
+    AutoModelForSequenceClassification.from_pretrained('tasksource/ModernBERT-base-nli')"
+
 # Copy all project files
 COPY . .
 
