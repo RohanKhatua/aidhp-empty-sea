@@ -25,12 +25,14 @@ class ParsedEmail(BaseModel):
     attachments: List[Attachment]  # Same structure as in Email, but with actual parsed "content"
 
 # 📊 Extracted Fields (Data Extraction Output)
-class ExtractedData(BaseModel):
-    email_id: str
-    amount: Optional[float] = None
-    currency: Optional[str] = None
-    recipient: Optional[str] = None
-    expiration_date: Optional[str] = None  # Format: YYYY-MM-DD
+# class ExtractedData(BaseModel):
+#     email_id: str
+#     amount: Optional[float] = None
+#     currency: Optional[str] = None
+#     recipient: Optional[str] = None
+#     expiration_date: Optional[str] = None  # Format: YYYY-MM-DD
+
+
 
 # 🔍 Classification Output (Classifier Output)
 class Classification(BaseModel):

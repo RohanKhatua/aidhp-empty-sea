@@ -52,6 +52,8 @@ def process_email(raw_email: Dict):
 
     # Step 5: Send Notifications
     # send_notification()
+    
+    # Send the extracted data and classification and email content to the frontend
 
     return {"message": "Email processed successfully!", "classification": classification.model_dump()}
 
