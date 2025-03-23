@@ -14,11 +14,24 @@ interface HighlightedTextProps {
 
 const HighlightedText = ({ body, entities }: HighlightedTextProps) => {
   const labelColors: { [key: string]: string } = {
-    ORG: 'bg-orange-100',
-    PERSON: 'bg-green-100',
-    GPE: 'bg-blue-100',
-    DATE: 'bg-purple-100',
-    MONEY: 'bg-yellow-100',
+    CARDINAL: 'bg-pink-100',       // Numbers
+    DATE: 'bg-purple-100',         // Dates
+    EVENT: 'bg-red-100',           // Events
+    FAC: 'bg-indigo-100',          // Facilities
+    GPE: 'bg-blue-100',            // Geo-political entities
+    LANGUAGE: 'bg-amber-100',      // Languages
+    LAW: 'bg-rose-100',            // Legal documents
+    LOC: 'bg-cyan-100',            // Locations
+    MONEY: 'bg-yellow-100',        // Monetary values
+    NORP: 'bg-lime-100',           // Nationalities/religious/political groups
+    ORDINAL: 'bg-fuchsia-100',     // Ordinal numbers
+    ORG: 'bg-orange-100',          // Organizations
+    PERCENT: 'bg-teal-100',        // Percentages
+    PERSON: 'bg-green-100',        // People
+    PRODUCT: 'bg-emerald-100',     // Products
+    QUANTITY: 'bg-violet-100',     // Quantities
+    TIME: 'bg-sky-100',            // Times
+    WORK_OF_ART: 'bg-pink-100',    // Creative works
   };
 
   // Create an array of text fragments and entities
