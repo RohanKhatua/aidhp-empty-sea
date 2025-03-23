@@ -1,4 +1,4 @@
-from src.models import ParsedEmail
+from src.models import ParsedEmail, ExtractedData
 import spacy
 import json
 import subprocess
@@ -41,7 +41,7 @@ def spacy_extract_with_labels(text):
     ]
 
 
-def extract_fields(parsed_email: ParsedEmail) -> dict[str, str]:
+def extract_fields(parsed_email: ParsedEmail) -> ExtractedData:
 
     text_to_process = (
         f"Subject: {parsed_email.subject}\nBody: {parsed_email.parsed_body}"

@@ -1,9 +1,11 @@
 from pydantic import BaseModel
 from typing import List, Optional, Dict
 
+
 class Attachment(BaseModel):
     fileName: str
     data: str  # Base64 encoded content OR parsed content
+
 
 # 📩 Email Data Model (Ingestion Output)
 class Email(BaseModel):
@@ -12,7 +14,9 @@ class Email(BaseModel):
     body: str
     timestamp: str  # Format: YYYY-MM-DD HH:MM:SS
     sender: str
-    attachments: List[Attachment]  # [{ "filename": "file.pdf", "content": "base64string" }]
+    attachments: List[
+        Attachment
+    ]  # [{ "filename": "file.pdf", "content": "base64string" }]
 
 
 # 📜 Parsed Email Data Model (Parser Output)
@@ -22,7 +26,10 @@ class ParsedEmail(BaseModel):
     subject: str
     timestamp: str  # Format: YYYY-MM-DD HH:MM:SS
     sender: str
-    attachments: List[Attachment]  # Same structure as in Email, but with actual parsed "content"
+    attachments: List[
+        Attachment
+    ]  # Same structure as in Email, but with actual parsed "content"
+
 
 # 📊 Extracted Fields (Data Extraction Output)
 # class ExtractedData(BaseModel):
@@ -33,6 +40,19 @@ class ParsedEmail(BaseModel):
 #     expiration_date: Optional[str] = None  # Format: YYYY-MM-DD
 
 
+class ExtractedField(BaseModel):
+    entity: str
+    label: str
+    start_idx: int
+    end_idx: int
+
+
+class ExtractedData(BaseModel):
+    email_id: str
+    extracted_fields: List[
+        ExtractedField
+    ]  # [{"entity": "Transfer", "label": "Action", "start_idx": 0, "end_idx": 7}]
+
 
 # 🔍 Classification Output (Classifier Output)
 class Classification(BaseModel):
@@ -42,10 +62,13 @@ class Classification(BaseModel):
     confidence: float
     reasoning: str  # Explanation of classification decision
 
+
 # 🔔 Notification Model (For sending notifications) This will be sent to n8n or other notif handler.
 class NotificationRequest(BaseModel):
     email_id: str
-    request_types: List[Dict[str, str]]  # [{"type": "Money Movement", "subtype": "Inbound"}]
+    request_types: List[
+        Dict[str, str]
+    ]  # [{"type": "Money Movement", "subtype": "Inbound"}]
     teams_to_notify: List[str]  # ["Payments Team", "Operations"]
     status: str  # e.g., "Processed", "Pending", "Failed"
     message: Optional[str] = None  # Optional message for additional context
