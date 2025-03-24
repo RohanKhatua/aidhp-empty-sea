@@ -59,7 +59,7 @@ def process_email(raw_email: Dict):
         "subject": parsed_email.subject,
         "timestamp": parsed_email.timestamp,
         "sender": parsed_email.sender,
-        "classification": classification.json(),
+        "classification": classification,
         "extracted_data": extracted_data,
         "text_to_process": text_to_process,
     }
