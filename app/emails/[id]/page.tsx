@@ -7,22 +7,68 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { formatDate } from "@/lib/utils"
-import { emails, classifications } from "@/lib/data"
-import { AttachmentList } from "@/components/attachment-list"
-import { ChevronLeft, Mail, FileText, Tag } from "lucide-react"
+import { ChevronLeft, Mail, Tag } from "lucide-react"
 import HighlightedText from "@/components/highlighted-text"
+import { Email, Classification } from "@/types"
+import { useEffect, useState } from "react"
+import axios from "axios"
+import { toast, ToastContainer } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 
 export default function EmailPage() {
-  const { id } = useParams()
-  const email = emails.find((email) => email.email_id === id)
-  const classification = classifications.find((c) => c.email_id === id)
+  const { id } = useParams<{ id: string }>();
+  const [email, setEmail] = useState<Email | null>(null);
+  const [classification, setClassification] = useState<Classification | null>(null);
+
+  useEffect(() => {
+    console.log("Fetching single email data");
+
+    async function fetchData() {
+      try {
+        const response = await axios.get<Email[]>(`/api/emails`);
+        const emails = response.data;
+
+        console.log("Route param id:", id);
+        console.log("Available email ids:", emails.map((e) => e.email_id));
+
+        const emailData = emails.find((email) => email.email_id === id);
+
+        if (emailData) {
+          console.log("Found email Data - ", emailData);
+
+          // Set both email and classification in the same render cycle
+          setEmail(emailData);
+          setClassification(emailData.classification);
+
+          // These console.logs will still show null due to async state updates
+          console.log("Email - ", email);
+          console.log("Classification - ", classification);
+        } else {
+          toast.error("Email not found");
+        }
+      } catch (error) {
+        toast.error("Failed to fetch email or classification data.");
+      }
+    }
+
+    fetchData();
+  }, [id]);
+
+  // If you want to log the updated state, use useEffect
+  useEffect(() => {
+    if (email && classification) {
+      console.log("Updated Email - ", email);
+      console.log("Updated Classification - ", classification);
+    }
+  }, [email, classification]);
 
   if (!email || !classification) {
-    return notFound()
+    return <div>Loading...</div>;
   }
 
   return (
     <div className="container mx-auto py-12 max-w-5xl">
+      <ToastContainer />
       <div className="mb-8">
         <Link href="/" passHref>
           <Button variant="ghost" size="sm" className="pl-0 hover:bg-transparent">
@@ -57,21 +103,8 @@ export default function EmailPage() {
             <Separator />
             <CardContent className="pt-6">
               <div className="prose max-w-none text-foreground">
-                <HighlightedText body={email.body} entities={email.entities} />
+                <HighlightedText body={email.text_to_process} entities={email.extracted_data} />
               </div>
-
-              {email.attachments.length > 0 && (
-                <>
-                  <Separator className="my-6" />
-                  <div>
-                    <div className="flex items-center gap-2 mb-4">
-                      <FileText className="h-4 w-4 text-primary" />
-                      <h3 className="text-sm font-medium">Attachments ({email.attachments.length})</h3>
-                    </div>
-                    <AttachmentList attachments={email.attachments} />
-                  </div>
-                </>
-              )}
             </CardContent>
           </Card>
         </div>
@@ -124,4 +157,3 @@ export default function EmailPage() {
     </div>
   )
 }
-

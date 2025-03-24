@@ -9,11 +9,13 @@ const client = new MongoClient(uri);
 
 export async function GET(request: Request) {
     try {
+        // console.log('Inside GET /api/emails');
         await client.connect();
         const database = client.db('emailDB');
         const emails = database.collection('emails');
         const emailList = await emails.find({}).toArray();
 
+        // console.log('Fetched emails:', emailList);
         return new Response(JSON.stringify(emailList), {
             status: 200,
             headers: { 'Content-Type': 'application/json' }

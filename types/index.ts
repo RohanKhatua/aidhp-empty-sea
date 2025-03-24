@@ -18,7 +18,7 @@ export interface Email {
     timestamp: string;
     text_to_process: string;
     extracted_data: Entity[];
-    classification: string; // JSON string of Classification
+    classification: Classification; // JSON string of Classification
 }
 
 export type Classification = {
