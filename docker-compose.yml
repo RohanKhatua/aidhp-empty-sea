@@ -6,6 +6,8 @@ services:
       - "8000:8000"
     volumes:
       - ./code/src:/app/src
+    env_file:
+      - .env
     environment:
       - PYTHONUNBUFFERED=1
     depends_on:
