@@ -16,9 +16,11 @@ from src.email_ingestion.ingestion import ingest_email
 
 app = FastAPI()
 
+
 @app.get("/health")
 def health_check():
     return {"status": "ok"}
+
 
 @app.post("/process-email")
 def process_email(raw_email: Dict):
@@ -38,7 +40,7 @@ def process_email(raw_email: Dict):
 
     # Step 2: Parse Email
     parsed_email = parse_email(email)
-    print(parsed_email.model_dump_json())
+    # print(parsed_email.model_dump())
 
     # Step 3: Extract Key Data
     extracted_data = extract_fields(parsed_email)
@@ -46,17 +48,22 @@ def process_email(raw_email: Dict):
 
     # Step 4: Classify Request Type
     classification = classify_email(parsed_email)
-    print(classification.model_dump_json())
-    print("Classification Result:")
-    print(classification.reasoning)
+    # print(classification.json(indent=4))
+    # print("Classification Result:")
+    # print(classification.reasoning)
 
     # Step 5: Send Notifications
     # send_notification()
-    
+
     # Send the extracted data and classification and email content to the frontend
 
-    return {"message": "Email processed successfully!", "classification": classification.model_dump()}
+    return {
+        "message": "Email processed successfully!",
+        "classification": classification.json(),
+    }
+
 
 if __name__ == "__main__":
     import uvicorn
+
     uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)

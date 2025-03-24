@@ -1,11 +1,16 @@
 # Use Python 3.10
-FROM python:3.10
+FROM python:3.9-slim
 
 WORKDIR /app
 
 # Copy and install dependencies
 COPY requirements.txt .
+
+RUN apt-get update && apt-get install -y gcc g++ python3-dev
+
 RUN pip install -r requirements.txt
+
+RUN apt-get purge -y gcc g++ python3-dev && apt-get autoremove -y && apt-get clean
 
 # Create a directory to cache Hugging Face models
 RUN mkdir -p /root/.cache/huggingface
