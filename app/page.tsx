@@ -1,32 +1,49 @@
 import Link from "next/link"
+import { Mail, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
 import { formatDate } from "@/lib/utils"
 import { emails } from "@/lib/data"
 
 export default function Home() {
   return (
-    <div className="container mx-auto py-10">
-      <h1 className="text-3xl font-bold mb-6">Email Viewer</h1>
-      <div className="grid gap-6">
+    <div className="container mx-auto py-12 max-w-4xl">
+      <div className="flex items-center gap-3 mb-8">
+        <Mail className="h-6 w-6 text-primary" />
+        <h1 className="text-2xl font-semibold tracking-tight">Inbox</h1>
+      </div>
+
+      <div className="space-y-4">
         {emails.map((email) => (
-          <Card key={email.email_id} className="hover:shadow-md transition-shadow">
-            <CardHeader>
-              <CardTitle className="flex justify-between items-start">
-                <span className="line-clamp-1">{email.subject}</span>
-                <span className="text-sm font-normal text-muted-foreground">{formatDate(email.timestamp)}</span>
-              </CardTitle>
-              <CardDescription>From: {email.sender}</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p className="line-clamp-2 text-sm text-muted-foreground">{email.body}</p>
-            </CardContent>
-            <CardFooter>
-              <Link href={`/email/${email.email_id}`} passHref>
-                <Button>View Email</Button>
-              </Link>
-            </CardFooter>
-          </Card>
+          <Link href={`/email/${email.email_id}`} key={email.email_id}>
+            <Card className="overflow-hidden transition-all hover:border-primary/50 hover:shadow-sm">
+              <CardContent className="p-0">
+                <div className="grid grid-cols-12 items-start gap-4 p-6">
+                  <div className="col-span-12 sm:col-span-9">
+                    <div className="flex items-center gap-2 mb-1">
+                      <h3 className="font-medium line-clamp-1">{email.subject}</h3>
+                      <Badge variant="outline" className="ml-2 text-xs font-normal">
+                        {email.sender.split("@")[1]}
+                      </Badge>
+                    </div>
+                    <p className="text-sm text-muted-foreground mb-2">
+                      From: <span className="text-foreground">{email.sender}</span>
+                    </p>
+                    <p className="line-clamp-2 text-sm text-muted-foreground">{email.body}</p>
+                  </div>
+
+                  <div className="col-span-12 sm:col-span-3 flex flex-col items-end justify-between h-full">
+                    <span className="text-xs text-muted-foreground">{formatDate(email.timestamp)}</span>
+                    <Button variant="ghost" size="sm" className="mt-2 sm:mt-0">
+                      <span className="sr-only">View email</span>
+                      <ChevronRight className="h-4 w-4" />
+                    </Button>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </Link>
         ))}
       </div>
     </div>
