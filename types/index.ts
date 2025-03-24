@@ -1,6 +1,7 @@
 export type Attachment = {
     fileName: string
     data: string // Base64 encoded content OR parsed content
+    extractedData?: string // Extracted text content
 }
 
 export type Entity = {
@@ -16,8 +17,10 @@ export interface Email {
     sender: string;
     timestamp: string;
     text_to_process: string;
-    extracted_data: { entity: string; label: string }[];
+    extracted_data: Entity[];
+    classification: string; // JSON string of Classification
 }
+
 export type Classification = {
     email_id: string
     request_type: string
