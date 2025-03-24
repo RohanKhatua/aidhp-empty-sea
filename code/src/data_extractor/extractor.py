@@ -3,6 +3,7 @@ import spacy
 import json
 import subprocess
 import sys
+import re
 
 
 def download_spacy_model(model_name: str):
@@ -41,21 +42,28 @@ def spacy_extract_with_labels(text):
     ]
 
 
-def extract_fields(parsed_email: ParsedEmail) -> ExtractedData:
+def generate_text_to_process(parsed_email: ParsedEmail) -> str:
+    text_to_process = parsed_email.parsed_body
 
-    text_to_process = (
-        f"Subject: {parsed_email.subject}\nBody: {parsed_email.parsed_body}"
-    )
+    # Clean up the email body
+    text_to_process = re.sub(r"[^a-zA-Z0-9\s]", "", text_to_process)
+    text_to_process = re.sub(
+        r"\s{2,}", " ", text_to_process
+    )  # Remove more than one space
+    text_to_process = re.sub(
+        r"\n{2,}", "\n", text_to_process
+    )  # Remove more than one new line
 
     attachment_text = "".join(
         attachment.data for attachment in parsed_email.attachments
     )
 
     text_to_process += attachment_text
+    return text_to_process
 
-    # text_to_process now contains the subject, body, and all attachment data
-    # We can now use a NLP model to extract structured data from this text
 
+def extract_fields(parsed_email: ParsedEmail) -> ExtractedData:
+    text_to_process = generate_text_to_process(parsed_email)
     extracted_data = spacy_extract_with_labels(text_to_process)
     return extracted_data
 
