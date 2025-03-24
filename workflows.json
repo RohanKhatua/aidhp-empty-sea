@@ -51,7 +51,24 @@
         -20
       ],
       "id": "dee75a17-bc48-4f77-b872-e471b2c874a2",
-      "name": "HTTP Request"
+      "name": "Send Email to Backend"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $json }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        460,
+        -20
+      ],
+      "id": "8749c1ca-c2e2-4613-9ce8-79336f86f37b",
+      "name": "Send Backend Result to Frontend"
     }
   ],
   "pinData": {},
@@ -71,7 +88,18 @@
       "main": [
         [
           {
-            "node": "HTTP Request",
+            "node": "Send Email to Backend",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Email to Backend": {
+      "main": [
+        [
+          {
+            "node": "Send Backend Result to Frontend",
             "type": "main",
             "index": 0
           }
@@ -83,7 +111,7 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "921f0386-015c-448c-b74a-2576cc21190d",
+  "versionId": "29c82293-6766-4964-93d3-143170a04074",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "488bd3ff858083858aa2956f3284f488f487007c880d65aaa3596f32bed679e5"
