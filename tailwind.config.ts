@@ -26,15 +26,15 @@ const config: Config = {
 				background: "hsl(var(--background))",
 				foreground: "hsl(var(--foreground))",
 				primary: {
-					DEFAULT: "hsl(215, 90%, 50%)",
+					DEFAULT: "hsl(0, 100%, 50%)", // Wells Fargo Red
 					foreground: "hsl(var(--primary-foreground))",
 				},
 				secondary: {
-					DEFAULT: "hsl(var(--secondary))",
+					DEFAULT: "hsl(45, 100%, 50%)", // Wells Fargo Yellow
 					foreground: "hsl(var(--secondary-foreground))",
 				},
 				destructive: {
-					DEFAULT: "hsl(var(--destructive))",
+					DEFAULT: "hsl(0, 100%, 50%)", // Wells Fargo Red
 					foreground: "hsl(var(--destructive-foreground))",
 				},
 				muted: {
@@ -42,7 +42,7 @@ const config: Config = {
 					foreground: "hsl(var(--muted-foreground))",
 				},
 				accent: {
-					DEFAULT: "hsl(var(--accent))",
+					DEFAULT: "hsl(45, 100%, 50%)", // Wells Fargo Yellow
 					foreground: "hsl(var(--accent-foreground))",
 				},
 				popover: {
@@ -63,9 +63,9 @@ const config: Config = {
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
-					primary: 'hsl(var(--sidebar-primary))',
+					primary: 'hsl(0, 100%, 50%)', // Wells Fargo Red
 					'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
-					accent: 'hsl(var(--sidebar-accent))',
+					accent: 'hsl(45, 100%, 50%)', // Wells Fargo Yellow
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'

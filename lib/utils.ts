@@ -17,3 +17,7 @@ export function formatDate(dateString: string) {
   }).format(date)
 }
 
+export function isClient() {
+  return typeof window !== 'undefined';
+}
+

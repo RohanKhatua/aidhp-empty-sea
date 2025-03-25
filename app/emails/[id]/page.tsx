@@ -14,6 +14,7 @@ import { useEffect, useState } from "react"
 import axios from "axios"
 import { toast, ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
+import { Progress } from "@/components/ui/progress"
 
 export default function EmailPage() {
   const { id } = useParams<{ id: string }>();
@@ -25,7 +26,7 @@ export default function EmailPage() {
 
     async function fetchData() {
       try {
-        const response = await axios.get<Email[]>(`/api/emails`);
+        const response = await axios.get<Email[]>(`/api/emails?collection=emails`);
         const emails = response.data;
 
         console.log("Route param id:", id);
@@ -98,6 +99,11 @@ export default function EmailPage() {
                   </span>
                   <span className="text-xs">{formatDate(email.timestamp)}</span>
                 </div>
+                <div className="flex items-center justify-between">
+                  <span>
+                    To: <span className="text-foreground">{email.recipients.join(", ")}</span>
+                  </span>
+                </div>
               </div>
             </CardHeader>
             <Separator />
@@ -135,14 +141,14 @@ export default function EmailPage() {
 
               <div>
                 <div className="text-xs font-medium uppercase text-muted-foreground mb-2">Confidence</div>
-                <div className="w-full bg-muted rounded-full h-1.5">
-                  <div
-                    className="bg-primary h-1.5 rounded-full"
-                    style={{ width: `${classification.confidence * 100}%` }}
-                  ></div>
-                </div>
-                <div className="text-right text-xs text-muted-foreground mt-1">
-                  {Math.round(classification.confidence * 100)}%
+                <div className="flex items-center space-x-2">
+                  <Progress
+                    value={classification.confidence * 100}
+                    className={`h-2 ${getConfidenceColor(classification.confidence)}`}
+                  />
+                  <span className="text-xs font-medium">
+                    {Math.round(classification.confidence * 100)}%
+                  </span>
                 </div>
               </div>
 
@@ -156,4 +162,15 @@ export default function EmailPage() {
       </div>
     </div>
   )
+}
+
+// Helper function to determine the color based on confidence
+function getConfidenceColor(confidence: number): string {
+  if (confidence < 0.4) {
+    return "bg-red-100 [&>div]:bg-gradient-to-r [&>div]:from-red-500 [&>div]:to-orange-500";
+  } else if (confidence < 0.7) {
+    return "bg-yellow-100 [&>div]:bg-gradient-to-r [&>div]:from-orange-500 [&>div]:to-yellow-500";
+  } else {
+    return "bg-green-100 [&>div]:bg-gradient-to-r [&>div]:from-green-500 [&>div]:to-emerald-500";
+  }
 }

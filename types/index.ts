@@ -19,6 +19,12 @@ export interface Email {
     text_to_process: string;
     extracted_data: Entity[];
     classification: Classification; // JSON string of Classification
+    recipients: string[]; // Add recipients field
+    _id: {
+        $oid: string;
+    };
+    message: string;
+    hash: string;
 }
 
 export type Classification = {
@@ -27,4 +33,12 @@ export type Classification = {
     request_subtype: string
     confidence: number
     reasoning: string // Explanation of classification decision
+}
+
+export interface DuplicateEmail {
+    _id: {
+        $oid: string;
+    };
+    message: string;
+    duplicate_email: Email;
 }

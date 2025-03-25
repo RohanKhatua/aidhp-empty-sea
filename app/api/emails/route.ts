@@ -8,11 +8,14 @@ if (!uri) {
 const client = new MongoClient(uri);
 
 export async function GET(request: Request) {
+    const url = new URL(request.url);
+    const collectionName = url.searchParams.get('collection') || 'emails';
+
     try {
         // console.log('Inside GET /api/emails');
         await client.connect();
         const database = client.db('emailDB');
-        const emails = database.collection('emails');
+        const emails = database.collection(collectionName);
         const emailList = await emails.find({}).toArray();
 
         // console.log('Fetched emails:', emailList);

@@ -17,7 +17,7 @@ interface HighlightedTextProps {
 const HighlightedText = ({ body, entities }: HighlightedTextProps) => {
   // More refined color palette with opacity for a subtle look
   const labelColors: { [key: string]: { bg: string; border: string; text: string } } = {
-    CARDINAL: { bg: "bg-primary/5", border: "border-primary/20", text: "text-primary-foreground" },
+    CARDINAL: { bg: "bg-primary-500/5", border: "border-primary-500/20", text: "text-primary-700" },
     DATE: { bg: "bg-violet-500/5", border: "border-violet-500/20", text: "text-violet-700" },
     EVENT: { bg: "bg-red-500/5", border: "border-red-500/20", text: "text-red-700" },
     FAC: { bg: "bg-indigo-500/5", border: "border-indigo-500/20", text: "text-indigo-700" },
@@ -76,7 +76,7 @@ const HighlightedText = ({ body, entities }: HighlightedTextProps) => {
 
   return (
     <TooltipProvider delayDuration={300}>
-      <div className="whitespace-pre-wrap leading-relaxed p-5 rounded-lg bg-card text-card-foreground">
+      <div className="whitespace-pre-wrap leading-relaxed p-2 rounded-lg bg-card text-card-foreground">
         {fragments.map((fragment, index) => {
           if (fragment.entity) {
             const colorSet = labelColors[fragment.entity.label] || {
@@ -92,10 +92,10 @@ const HighlightedText = ({ body, entities }: HighlightedTextProps) => {
                     initial={{ opacity: 0.8 }}
                     animate={{ opacity: 1 }}
                     whileHover={{
-                      scale: 1.1, // Increased zoom effect
+                      scale: 1.05,
                       transition: { duration: 0.2 },
                     }}
-                    className={`inline-block px-1.5 py-0.5 rounded border ${colorSet.bg} ${colorSet.border} ${colorSet.text} 
+                    className={`inline mx-0 px-0 py-0 rounded-sm border-b ${colorSet.bg} ${colorSet.text} 
                       text-sm font-medium cursor-help transition-all duration-200 ease-in-out`}
                   >
                     {fragment.text}
