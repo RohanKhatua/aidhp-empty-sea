@@ -55,20 +55,25 @@
     },
     {
       "parameters": {
-        "method": "POST",
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={{ $json }}",
+        "operation": "insert",
+        "collection": "emails",
+        "fields": "={{Object.keys($json).join(',')}}",
         "options": {}
       },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
+      "type": "n8n-nodes-base.mongoDb",
+      "typeVersion": 1.1,
       "position": [
         460,
         -20
       ],
-      "id": "8749c1ca-c2e2-4613-9ce8-79336f86f37b",
-      "name": "Send Backend Result to Frontend"
+      "id": "4ecc8c97-9b8e-4212-a293-dfb473da8e03",
+      "name": "MongoDB",
+      "credentials": {
+        "mongoDb": {
+          "id": "GuZRHG7mCUYDiNhG",
+          "name": "MongoDB account"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -99,7 +104,7 @@
       "main": [
         [
           {
-            "node": "Send Backend Result to Frontend",
+            "node": "MongoDB",
             "type": "main",
             "index": 0
           }
@@ -111,7 +116,7 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "29c82293-6766-4964-93d3-143170a04074",
+  "versionId": "6f556fad-76a8-44b1-b7bb-c4aa0a4b6bed",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "488bd3ff858083858aa2956f3284f488f487007c880d65aaa3596f32bed679e5"
