@@ -1,8 +1,8 @@
-# 🚀 Empty Sea
+# 🚀 GATE: Gatekeeper and Automated Triage of Emails
 
 ## 📌 Table of Contents
 
-- [🚀 Empty Sea](#-empty-sea)
+- [🚀 GATE: Gatekeeper and Automated Triage of Emails](#-gate-gatekeeper-and-automated-triage-of-emails)
   - [📌 Table of Contents](#-table-of-contents)
   - [🎯 Introduction](#-introduction)
   - [🎥 Demo](#-demo)
@@ -13,7 +13,7 @@
   - [🏃 How to Run](#-how-to-run)
       - [**Prerequisites**](#prerequisites)
     - [**📥 Clone the Repository**](#-clone-the-repository)
-    - [**🔧 Setup \& Run n8n**](#-setup--run-n8n)
+    - [**🔧 Setup \& Run the Application**](#-setup--run-the-application)
     - [**📤 Import the Workflow**](#-import-the-workflow)
     - [**🛠 Making Changes \& Keeping Workflows Updated**](#-making-changes--keeping-workflows-updated)
   - [🏗️ Tech Stack](#️-tech-stack)
@@ -23,11 +23,10 @@
 
 ## 🎯 Introduction
 
-A brief overview of your project and its purpose. Mention which problem statement are your attempting to solve. Keep it concise and engaging.
+GATE is a modular email processing pipeline designed to automate workflows using **n8n** and manage data persistence with **MongoDB**. It processes incoming emails, extracts relevant information, classifies them, and sends notifications to appropriate teams. This project aims to streamline email-based workflows for businesses.
 
 ## 🎥 Demo
 
-🔗 [Live Demo](#) (if applicable)  
 📹 [Video Demo](#) (if applicable)  
 🖼️ Screenshots:
 
@@ -35,19 +34,32 @@ A brief overview of your project and its purpose. Mention which problem statemen
 
 ## 💡 Inspiration
 
-What inspired you to create this project? Describe the problem you're solving.
+The project was inspired by the need to automate repetitive email-based workflows, such as processing payment requests, and managing email classification and subsequent notifications to concerned teams.
 
 ## ⚙️ What It Does
 
-Explain the key features and functionalities of your project.
+- Ingests emails via IMAP.
+- Parses email body and attachments.
+- Extracts structured data from email bodies and attachments.
+- Classifies emails into categories using machine learning (BERT based models such as DeBERTa, bart, and modernBERT).
+- Detects duplicate or near-duplicate emails.
+- Sends notifications to relevant teams based on classification.
 
 ## 🛠️ How We Built It
 
-Briefly outline the technologies, frameworks, and tools used in development.
+- **Backend**: FastAPI for API endpoints and email processing logic.
+- **Database**: MongoDB for storing email metadata and hashes.
+- **Workflow Automation**: n8n for managing notifications and workflows.
+- **NLP Tools**: SpaCy and Levenshtein for text extraction and fuzzy matching.
+- **Machine Learning**: BERT-based models for email classification.
+- **Configuration Management**: YAML for category and notification mappings/configs.
+- **Docker**: For containerization and deployment.
 
 ## 🚧 Challenges We Faced
 
-Describe the major technical or non-technical challenges your team encountered.
+- Implementing accurate duplicate detection using fuzzy matching.
+- Designing a scalable architecture for high email volumes.
+- Ensuring seamless integration with n8n workflows and email notifications/ingestions.
 
 ## 🏃 How to Run
 
@@ -66,9 +78,9 @@ cd your-repo
 
 ---
 
-### **🔧 Setup & Run n8n**  
+### **🔧 Setup & Run the Application**  
 
-1. **Start n8n using Docker Compose:**  
+1. **Start the application using Docker Compose:**  
    ```sh
    docker-compose up -d
    ```  
@@ -96,12 +108,16 @@ Whenever you modify workflows, **export and commit them**.
 
 ## 🏗️ Tech Stack
 
-- 🔹 Frontend: React / Vue / Angular
-- 🔹 Backend: Node.js / FastAPI / Django
-- 🔹 Database: PostgreSQL / Firebase
-- 🔹 Other: OpenAI API / Twilio / Stripe
+- **Backend**: FastAPI  
+- **Database**: MongoDB  
+- **Workflow Automation**: n8n  
+- **NLP Tools**: SpaCy, Levenshtein  
+- **Configuration Management**: YAML  
+- **Models**: BERT-based models (DeBERTa, bart, modernBERT)
 
 ## 👥 Team
 
-- **Your Name** - [GitHub](#) | [LinkedIn](#)
-- **Teammate 2** - [GitHub](#) | [LinkedIn](#)
+- **Anirudh Mishra** - [GitHub](https://github.com/anirudhgray) | [LinkedIn](https://www.linkedin.com/in/anirudh-mishra/)
+- **Rohan Khatua** - [GitHub](https://GitHub.com/rohankhatua) | [LinkedIn](https://www.linkedin.com/in/anirudh-mishra)
+- **Arnav Chouhan** - [GitHub](https://GitHub.com/arnavnotfound) | [LinkedIn](https://www.linkedin.com/in/arnav-chouhan-450585268/)
+- **Param Kansagra** - [GitHub](https://github.com/paramkansagra) | [LinkedIn](https://www.linkedin.com/in/paramkansagra/)
