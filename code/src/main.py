@@ -10,6 +10,7 @@ from typing import Dict
 from fastapi import FastAPI
 from pymongo import MongoClient
 
+from src.email_classifier.config_reader import load_notification_mapping
 from src.duplicate_checker.duplicate_checker import is_duplicate
 from src.email_parser.parser import parse_email
 from src.data_extractor.extractor import extract_fields, generate_text_to_process
@@ -68,6 +69,9 @@ def process_email(raw_email: Dict):
 
     # Step 5: Send Notifications
     # send_notification()
+    category = classification.request_type
+    subcategory = classification.request_subtype
+    recipients = load_notification_mapping().get(category, [])
 
     # Send the extracted data and classification and email content to the frontend
     return {
@@ -80,6 +84,7 @@ def process_email(raw_email: Dict):
         "classification": classification,
         "extracted_data": extracted_data,
         "text_to_process": text_to_process,
+        "recipients": recipients,
     }
 
 

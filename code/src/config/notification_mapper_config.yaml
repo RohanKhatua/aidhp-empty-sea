@@ -1,0 +1,13 @@
+category_to_recipients:
+  AU Transfer:
+    - au-team@example.com
+  Closing Notice:
+    - closing-team@example.com
+  Commitment Change:
+    - commitment-team@example.com
+  Fee Payment:
+    - finance-team@example.com
+  Money Movement:
+    - inbound-team@example.com
+  Adjustment:
+    - adjustments-team@example.com

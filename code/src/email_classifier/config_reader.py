@@ -33,3 +33,21 @@ def load_categories_config(config_path: str = "src/email_classifier/config/categ
     with open(config_path, "r") as file:
         config = yaml.safe_load(file)
     return config["categories"], config["subcategories"]
+
+def load_notification_mapping(config_path: str = "src/config/notification_mapper_config.yaml") -> dict:
+    """
+    Loads the category-to-recipients mapping from a YAML configuration file.
+
+    Args:
+        config_path (str): Path to the YAML configuration file.
+
+    Returns:
+        dict: A dictionary mapping categories to recipient email addresses.
+    """
+    if not os.path.exists(config_path):
+        raise FileNotFoundError(f"Configuration file not found at: {config_path}")
+    
+    with open(config_path, "r") as file:
+        config = yaml.safe_load(file)
+    
+    return config.get("category_to_recipients", {})

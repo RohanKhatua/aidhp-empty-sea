@@ -63,8 +63,8 @@
       "type": "n8n-nodes-base.mongoDb",
       "typeVersion": 1.1,
       "position": [
-        680,
-        -120
+        700,
+        -180
       ],
       "id": "4ecc8c97-9b8e-4212-a293-dfb473da8e03",
       "name": "MongoDB",
@@ -130,6 +130,30 @@
           "name": "MongoDB account"
         }
       }
+    },
+    {
+      "parameters": {
+        "fromEmail": "spacequerywebapp@gmail.com",
+        "toEmail": "={{ $json.recipients ? $json.recipients[0] : \"spacequerywebapp@gmail.com\" }}",
+        "subject": "New Email needs your attention.",
+        "html": "=New email with id {{ $json.email_id }} has been assigned types {{ $json.classification.request_type }} : {{ $json.classification.request_subtype }}. Please take appropriate action.",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        900,
+        -120
+      ],
+      "id": "f52c5611-5fe1-4d21-8516-4dfbebc13ef1",
+      "name": "Send Email",
+      "webhookId": "7044cf40-4f46-4a46-801b-e5ea86eca492",
+      "credentials": {
+        "smtp": {
+          "id": "lJiSrpUqhZ6oX6dL",
+          "name": "SMTP account"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -184,13 +208,24 @@
           }
         ]
       ]
+    },
+    "MongoDB": {
+      "main": [
+        [
+          {
+            "node": "Send Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": true,
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "c77141c4-b30e-435d-8150-0a3cb23a957e",
+  "versionId": "de13c419-2f82-49e1-8e17-b9153b8994cc",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "488bd3ff858083858aa2956f3284f488f487007c880d65aaa3596f32bed679e5"
