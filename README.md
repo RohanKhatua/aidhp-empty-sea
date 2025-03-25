@@ -34,7 +34,9 @@ GATE is a modular email processing pipeline designed to automate workflows using
 ### 🖼️ Screenshots:
 
 ![n8n workflow](/artifacts/demo/images/n8n.png)
+![email list](/artifacts/demo/images/email-list.png)
 ![sample email](/artifacts/demo/images/sample-email.png)
+![notif](/artifacts/demo/images/notif.png)
 
 ## 💡 Inspiration
 
@@ -44,7 +46,7 @@ The project was inspired by the need to automate repetitive email-based workflow
 
 - Ingests emails via IMAP.
 - Parses email body and attachments.
-- Extracts structured data from email bodies and attachments.
+- Extracts and highlights relevant structured data from email bodies and attachments (such as monetary amounts, names and dates).
 - Classifies emails into categories using machine learning (BERT based models such as DeBERTa, bart, and modernBERT).
 - Detects duplicate or near-duplicate emails.
 - Sends notifications to relevant teams based on classification.
