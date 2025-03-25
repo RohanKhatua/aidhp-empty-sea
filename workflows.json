@@ -55,20 +55,105 @@
     },
     {
       "parameters": {
-        "method": "POST",
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={{ $json }}",
+        "operation": "insert",
+        "collection": "emails",
+        "fields": "={{Object.keys($json).join(',')}}",
         "options": {}
       },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
+      "type": "n8n-nodes-base.mongoDb",
+      "typeVersion": 1.1,
+      "position": [
+        700,
+        -180
+      ],
+      "id": "4ecc8c97-9b8e-4212-a293-dfb473da8e03",
+      "name": "MongoDB",
+      "credentials": {
+        "mongoDb": {
+          "id": "GuZRHG7mCUYDiNhG",
+          "name": "MongoDB account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "42391d49-f9b8-43f2-a6b8-0100972be84a",
+              "leftValue": "={{ $json.message }}",
+              "rightValue": "Email processed successfully!",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
       "position": [
         460,
         -20
       ],
-      "id": "8749c1ca-c2e2-4613-9ce8-79336f86f37b",
-      "name": "Send Backend Result to Frontend"
+      "id": "11583f42-a8f0-4b5e-9163-c66a57eb92d2",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "operation": "insert",
+        "collection": "dupes",
+        "fields": "={{Object.keys($json).join(',')}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.mongoDb",
+      "typeVersion": 1.1,
+      "position": [
+        680,
+        100
+      ],
+      "id": "487ec662-1cd2-4712-a6f8-2768ffa068e1",
+      "name": "Dupes",
+      "credentials": {
+        "mongoDb": {
+          "id": "GuZRHG7mCUYDiNhG",
+          "name": "MongoDB account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fromEmail": "spacequerywebapp@gmail.com",
+        "toEmail": "={{ $json.recipients ? $json.recipients[0] : \"spacequerywebapp@gmail.com\" }}",
+        "subject": "New Email needs your attention.",
+        "html": "=New email with id {{ $json.email_id }} has been assigned types {{ $json.classification.request_type }} : {{ $json.classification.request_subtype }}. Please take appropriate action.",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        900,
+        -120
+      ],
+      "id": "f52c5611-5fe1-4d21-8516-4dfbebc13ef1",
+      "name": "Send Email",
+      "webhookId": "7044cf40-4f46-4a46-801b-e5ea86eca492",
+      "credentials": {
+        "smtp": {
+          "id": "lJiSrpUqhZ6oX6dL",
+          "name": "SMTP account"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -99,7 +184,36 @@
       "main": [
         [
           {
-            "node": "Send Backend Result to Frontend",
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "MongoDB",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Dupes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MongoDB": {
+      "main": [
+        [
+          {
+            "node": "Send Email",
             "type": "main",
             "index": 0
           }
@@ -111,7 +225,7 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "29c82293-6766-4964-93d3-143170a04074",
+  "versionId": "de13c419-2f82-49e1-8e17-b9153b8994cc",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "488bd3ff858083858aa2956f3284f488f487007c880d65aaa3596f32bed679e5"

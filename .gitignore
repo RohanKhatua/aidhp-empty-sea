@@ -175,3 +175,5 @@ cython_debug/
 
 n8n_data
 .vscode
+
+mongo_data

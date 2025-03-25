@@ -1,0 +1,31 @@
+categories:
+  - Adjustment
+  - AU Transfer
+  - Closing Notice
+  - Commitment Change
+  - Fee Payment
+  - Money Movement - Inbound
+  - Money Movement - Outbound
+
+subcategories:
+  AU Transfer:
+    - Reallocation Fees
+    - Amendment Fees
+    - Reallocation Principal
+  Closing Notice:
+    - Cashless Roll
+    - Decrease
+    - Increase
+    - Ongoing Fee
+    - Letter of Credit Fee
+  Commitment Change:
+    - Increase
+  Fee Payment:
+    - Principal
+    - Interest
+    - Principal + Interest
+    - Principal + Interest + Fee
+  Money Movement - Inbound:
+    - Timebound
+    - Foreign Currency
+  Money Movement - Outbound: []

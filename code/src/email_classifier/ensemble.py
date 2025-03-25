@@ -6,38 +6,24 @@ from transformers import pipeline, BertTokenizer, AutoModel
 import torch
 import torch.nn.functional as F
 from sklearn.metrics.pairwise import cosine_similarity
-from src.email_classifier.config_reader import load_model_config
+from src.email_classifier.config_reader import load_categories_config, load_model_config
+import yaml
+from pathlib import Path
 
-# Define available categories and subcategories
-CATEGORIES = [
-    "Adjustment",
-    "AU Transfer",
-    "Closing Notice",
-    "Commitment Change",
-    "Fee Payment",
-    "Money Movement - Inbound",
-    "Money Movement - Outbound",
-]
+# Load categories and subcategories from the YAML file
 
-SUBCATEGORIES = {
-    "AU Transfer": ["Reallocation Fees", "Amendment Fees", "Reallocation Principal"],
-    "Closing Notice": [
-        "Cashless Roll",
-        "Decrease",
-        "Increase",
-        "Ongoing Fee",
-        "Letter of Credit Fee",
-    ],
-    "Commitment Change": ["Increase"],
-    "Fee Payment": [
-        "Principal",
-        "Interest",
-        "Principal + Interest",
-        "Principal + Interest + Fee",
-    ],
-    "Money Movement - Inbound": ["Timebound", "Foreign Currency"],
-    "Money Movement - Outbound": [],
-}
+
+# Load the configuration
+CATEGORIES, SUBCATEGORIES = load_categories_config()
+
+# Create combined labels for classification
+COMBINED_LABELS = []
+for category in CATEGORIES:
+    if category in SUBCATEGORIES and SUBCATEGORIES[category]:
+        for subcategory in SUBCATEGORIES[category]:
+            COMBINED_LABELS.append(f"{category} - {subcategory}")
+    else:
+        COMBINED_LABELS.append(category)
 
 # Create combined labels for classification
 COMBINED_LABELS = []

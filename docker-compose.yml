@@ -10,10 +10,8 @@ services:
       - .env
     environment:
       - PYTHONUNBUFFERED=1
-    env_file:
-      - .env
     depends_on:
-      - n8n
+      - mongo
 
   n8n:
     image: n8nio/n8n
@@ -27,3 +25,17 @@ services:
       - N8N_BASIC_AUTH_USER=admin
       - N8N_BASIC_AUTH_PASSWORD=admin
       - WEBHOOK_URL=http://localhost:5678/
+    depends_on:
+      - mongo
+      - email_processor
+
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./mongo_data:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=example
