@@ -6,6 +6,7 @@
   - [📌 Table of Contents](#-table-of-contents)
   - [🎯 Introduction](#-introduction)
   - [🎥 Demo](#-demo)
+    - [🖼️ Screenshots:](#️-screenshots)
   - [💡 Inspiration](#-inspiration)
   - [⚙️ What It Does](#️-what-it-does)
   - [🛠️ How We Built It](#️-how-we-built-it)
@@ -15,6 +16,7 @@
     - [**📥 Clone the Repository**](#-clone-the-repository)
     - [**🔧 Setup \& Run the Application**](#-setup--run-the-application)
     - [**📤 Import the Workflow**](#-import-the-workflow)
+    - [**Email Ingestion!**](#email-ingestion)
     - [**🛠 Making Changes \& Keeping Workflows Updated**](#-making-changes--keeping-workflows-updated)
   - [🏗️ Tech Stack](#️-tech-stack)
   - [👥 Team](#-team)
@@ -28,9 +30,11 @@ GATE is a modular email processing pipeline designed to automate workflows using
 ## 🎥 Demo
 
 📹 [Video Demo](#) (if applicable)  
-🖼️ Screenshots:
 
-![Screenshot 1](link-to-image)
+### 🖼️ Screenshots:
+
+![n8n workflow](/artifacts/demo/images/n8n.png)
+![sample email](/artifacts/demo/images/sample-email.png)
 
 ## 💡 Inspiration
 
@@ -47,8 +51,11 @@ The project was inspired by the need to automate repetitive email-based workflow
 
 ## 🛠️ How We Built It
 
+Detailed architecture and design decisions are documented in the [Architecture Document](artifacts/arch/README.md).
+
 - **Backend**: FastAPI for API endpoints and email processing logic.
 - **Database**: MongoDB for storing email metadata and hashes.
+- **Frontend**: a nextjs app for showing ingested emails (both classified and duplicate).
 - **Workflow Automation**: n8n for managing notifications and workflows.
 - **NLP Tools**: SpaCy and Levenshtein for text extraction and fuzzy matching.
 - **Machine Learning**: BERT-based models for email classification.
@@ -67,12 +74,13 @@ The project was inspired by the need to automate repetitive email-based workflow
 Make sure you have the following installed before proceeding:  
 - **Docker** & **Docker Compose**  
 - **Git**  
+- **Bun (or Node)** (for the frontend)
 
 ---
 
 ### **📥 Clone the Repository**  
 ```sh
-git clone https://github.com/yourusername/your-repo.git
+git clone https://github.com/ewfx/gaied-empty-sea.git
 cd your-repo
 ```
 
@@ -84,8 +92,24 @@ cd your-repo
    ```sh
    docker-compose up -d
    ```  
-2. Open n8n in your browser at:  
-   **[http://localhost:5678](http://localhost:5678)**  
+2. Open **n8n** in your browser at: **[http://localhost:5678](http://localhost:5678)**. You'll be able to see live workflow runs over here once setup.
+
+3. Confirm that **MongoDB** is running by trying to access localhost:27017 in your browser. You should see the MongoDB shell message (if you have MongoDB Compass, you may try and connect to the DB by using the following connection string: `mongodb://root:example@localhost:27017/`)
+
+4. **Frontend**:  
+   - Navigate to the `frontend` directory:  
+     ```sh
+     cd frontend
+     ```
+   - Install dependencies using Bun (or Node):  
+     ```sh
+     bun install
+     ```
+   - Start the frontend server:  
+     ```sh
+     bun dev
+     ```
+   - Open the frontend in your browser at: **[http://localhost:3000](http://localhost:3000)**. Since the n8n pipeline is not active yet, you won't see any emails just yet.
 
 ---
 
@@ -97,8 +121,19 @@ Since we do not commit the n8n database (`n8n.sqlite`), you need to manually **i
 2. Select the `workflows.json` file from this repo  
 3. Click **"Import"** and Save  
 
+![n8n import](/artifacts/demo/images/image.png)
+
 > **⚠️ Important:**  
 > Make sure to set up any necessary credentials manually in n8n after importing. For example, credentials for IMAP for which inbox to monitor. 
+
+---
+
+### **Email Ingestion!**
+
+Moment of truth!  
+   - Send an email to the configured inbox.
+   - Check the n8n workflow (in the `executions` tab) after waiting a few moments to see if it was ingested and processed correctly.
+   - Once the above is complete, check the frontend to see if the email is visible there.
 
 ---
 
@@ -110,10 +145,12 @@ Whenever you modify workflows, **export and commit them**.
 
 - **Backend**: FastAPI  
 - **Database**: MongoDB  
+- **Frontend**: Next.js
 - **Workflow Automation**: n8n  
 - **NLP Tools**: SpaCy, Levenshtein  
 - **Configuration Management**: YAML  
 - **Models**: BERT-based models (DeBERTa, bart, modernBERT)
+- **LLMs**: Gemini API
 
 ## 👥 Team
 

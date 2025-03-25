@@ -4,6 +4,8 @@
 
 The project is designed as a modular email processing pipeline that integrates with **n8n** for workflow automation and **MongoDB** for data persistence. The system processes incoming emails, extracts relevant information, classifies them, and sends notifications to appropriate teams based on predefined mappings.
 
+![sequence diagram](/artifacts/arch/sequence.png)
+
 ---
 
 ### **System Components**

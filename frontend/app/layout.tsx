@@ -1,18 +1,18 @@
-import type { Metadata } from 'next'
-import './globals.css'
-import { ThemeProvider } from "@/components/theme-provider"
-import { Providers } from "./providers"
+import type { Metadata } from 'next';
+import './globals.css';
+import { ThemeProvider } from '@/components/theme-provider';
+import { Providers } from './providers';
 
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
-  generator: 'v0.dev',
-}
+  title: 'GATE App',
+  description: 'GATE App',
+  generator: 'Next.js',
+};
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode;
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
@@ -20,5 +20,5 @@ export default function RootLayout({
         <Providers>{children}</Providers>
       </body>
     </html>
-  )
+  );
 }
