@@ -25,6 +25,8 @@ def classify_email(parsed_email: ParsedEmail) -> Classification:
     for attachment in parsed_email.attachments:
         email_text += "\n" + attachment.data
 
+    print("Email text: ", email_text)
+
     # Get classification decision from the ensemble
     selected_category, selected_subcategory, confidence = ensemble_classify(email_text)
 
