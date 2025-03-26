@@ -117,18 +117,6 @@ MONGODB_URI=mongodb://root:example@localhost:27017/
 4. Confirm that **MongoDB** is running by trying to access localhost:27017 in your browser. You should see the MongoDB shell message (if you have MongoDB Compass, you may try and connect to the DB by using the following connection string: `mongodb://root:example@localhost:27017/`)
 
 5. **Frontend**:
-   - Navigate to the `frontend` directory:
-     ```sh
-     cd frontend
-     ```
-   - Install dependencies using Bun (or Node):
-     ```sh
-     bun install
-     ```
-   - Start the frontend server:
-     ```sh
-     bun dev
-     ```
    - Open the frontend in your browser at: **[http://localhost:3000](http://localhost:3000)**. Since the n8n pipeline is not active yet, you won't see any emails just yet.
 
 ---
