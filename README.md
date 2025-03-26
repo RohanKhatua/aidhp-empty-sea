@@ -12,7 +12,7 @@
   - [🛠️ How We Built It](#️-how-we-built-it)
   - [🚧 Challenges We Faced](#-challenges-we-faced)
   - [🏃 How to Run](#-how-to-run)
-    - [**Prerequisites**](#prerequisites)
+      - [**Prerequisites**](#prerequisites)
     - [**📥 Clone the Repository**](#-clone-the-repository)
     - [**🔧 Setup \& Run the Application**](#-setup--run-the-application)
     - [**📤 Import the Workflow**](#-import-the-workflow)
@@ -30,6 +30,8 @@ GATE is a modular email processing pipeline designed to automate workflows using
 ## 🎥 Demo
 
 📹 [Demo Video](https://drive.google.com/file/d/1XoiLQy7OPTkB5HnsDdKvRpO0VdQW8lEk/view?usp=sharing)
+
+[Demo Presentation](/artifacts/demo/GATE-presentation.pptx)
 
 ### 🖼️ Screenshots:
 

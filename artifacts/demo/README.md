@@ -1,5 +1,5 @@
-Replace this file with files that you would like to use for your demo. This may include
+- 📹 [Demo Video](https://drive.google.com/file/d/1XoiLQy7OPTkB5HnsDdKvRpO0VdQW8lEk/view?usp=sharing)
 
-- A presentation/deck in pdf or pptx format
-- A demo video (screen capture) in mp4 or other popular video formats
-- Any other document describing your solution (in pdf or md format)
+- [Demo Presentation](/artifacts/demo/GATE-presentation.pptx)
+
+Please go over the [README](/README.md) and the [ARCHITECTURE](/artifacts/arch/README.md) documents for a detailed overview of the project.
