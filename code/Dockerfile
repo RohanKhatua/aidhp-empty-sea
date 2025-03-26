@@ -6,6 +6,11 @@ WORKDIR /app
 # Create a directory to cache Hugging Face models
 RUN mkdir -p /root/.cache/huggingface
 
+COPY requirements.txt .
+
+RUN apt-get update && apt-get install -y gcc g++ python3-dev
+
+RUN pip install -r requirements.txt
 # Pre-download Hugging Face models and cache them
 RUN python -c "from transformers import AutoTokenizer, AutoModelForSequenceClassification; \
     AutoTokenizer.from_pretrained('facebook/bart-large-mnli'); \
@@ -16,11 +21,6 @@ RUN python -c "from transformers import AutoTokenizer, AutoModelForSequenceClass
     AutoModelForSequenceClassification.from_pretrained('tasksource/ModernBERT-base-nli')"
 
 # Copy and install dependencies
-COPY requirements.txt .
-
-RUN apt-get update && apt-get install -y gcc g++ python3-dev
-
-RUN pip install -r requirements.txt
 
 RUN apt-get purge -y gcc g++ python3-dev && apt-get autoremove -y && apt-get clean
 

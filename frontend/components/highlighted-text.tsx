@@ -95,25 +95,25 @@ const HighlightedText = ({ body, entities }: HighlightedTextProps) => {
                       scale: 1.05,
                       transition: { duration: 0.2 },
                     }}
-                    className={`inline mx-0 px-0 py-0 rounded-sm border-b ${colorSet.bg} ${colorSet.text} 
-                      text-sm font-medium cursor-help transition-all duration-200 ease-in-out`}
+                    className={`inline-block mx-0 px-0 py-0 rounded-sm border-b ${colorSet.bg} ${colorSet.text} 
+                      text-sm font-medium cursor-help transition-all duration-200 ease-in-out break-words overflow-wrap-anywhere`}
                   >
                     {fragment.text}
                   </motion.span>
                 </TooltipTrigger>
-                <TooltipContent side="top" className="font-medium">
+                <TooltipContent side="top" className="font-medium max-w-xs break-words">
                   <div className="flex flex-col">
                     <span className="text-xs uppercase tracking-wide text-muted-foreground">
                       {fragment.entity.label}
                     </span>
-                    <span className="text-sm">{fragment.entity.entity}</span>
+                    <span className="text-sm break-words">{fragment.entity.entity}</span>
                   </div>
                 </TooltipContent>
               </Tooltip>
             )
           }
           return (
-            <span key={`text-${index}`} className="text-foreground">
+            <span key={`text-${index}`} className="text-foreground break-words">
               {fragment.text}
             </span>
           )

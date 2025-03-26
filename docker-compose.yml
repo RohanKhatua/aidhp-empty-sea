@@ -13,6 +13,18 @@ services:
     depends_on:
       - mongo
 
+  email-viewer:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: email_viewer
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./frontend/.env
+    depends_on:
+      - email_processor
+
   n8n:
     image: n8nio/n8n
     container_name: n8n

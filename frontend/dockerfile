@@ -1,0 +1,30 @@
+# Use the official Bun image as the base image
+FROM oven/bun:latest as builder
+
+# Set the working directory
+WORKDIR /app
+
+# Copy package files and install dependencies
+COPY package.json bun.lock ./
+RUN bun install
+
+# Copy the rest of the application code
+COPY . .
+
+# Build the Next.js application
+RUN bun next build
+
+# Use a lightweight image for the production environment
+FROM oven/bun:latest as runner
+
+# Set the working directory
+WORKDIR /app
+
+# Copy the built application from the builder stage
+COPY --from=builder /app ./
+
+# Expose the port the app runs on
+EXPOSE 3000
+
+# Start the Next.js application
+CMD ["bun", "next", "start"]
